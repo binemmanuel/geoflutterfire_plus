@@ -1,6 +1,8 @@
 import 'dart:math';
 
-import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:dart_firebase_admin/firestore.dart';
+
+// import 'package:cloud_firestore/cloud_firestore.dart';
 
 /// 32 codes to use aas Base32.
 const _base32Codes = '0123456789bcdefghjkmnpqrstuvwxyz';
