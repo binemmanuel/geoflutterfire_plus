@@ -1,6 +1,6 @@
 // import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dart_firebase_admin/firestore.dart';
-import 'package:flutter/foundation.dart';
+// import 'package:flutter/foundation.dart';
 import 'package:rxdart/rxdart.dart';
 
 import 'geo_fire_point.dart';
@@ -12,7 +12,7 @@ class GeoCollectionReference<T> {
   /// Instantiates [GeoCollectionReference].
   GeoCollectionReference(
     final CollectionReference<T> collectionReference, {
-    @visibleForTesting final String rangeQueryEndAtCharacter = '{',
+    final String rangeQueryEndAtCharacter = '{',
   })  : _collectionReference = collectionReference,
         _rangeQueryEndAtCharacter = rangeQueryEndAtCharacter;
 
@@ -330,7 +330,6 @@ class GeoCollectionReference<T> {
 
   /// Returns geohash query, adding query conditions if queryBuilder parameter
   /// is given.
-  @visibleForTesting
   Query<T> geoQuery({
     required final String field,
     final String geohashField = 'geohash',
