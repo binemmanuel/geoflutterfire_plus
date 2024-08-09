@@ -1,4 +1,5 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
+// import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:dart_firebase_admin/firestore.dart';
 import 'package:flutter/foundation.dart';
 import 'package:rxdart/rxdart.dart';
 
@@ -34,9 +35,9 @@ class GeoCollectionReference<T> {
   Future<void> set({
     required final String id,
     required final T data,
-    final SetOptions? options,
+    // final SetOptions? options,
   }) =>
-      _collectionReference.doc(id).set(data, options);
+      _collectionReference.doc(id).set(data, /* options */);
 
   /// Updates the [GeoPoint].data (i.e. [GeoPoint] geopoint and [String]
   /// geohash) of specified document.
@@ -66,7 +67,7 @@ class GeoCollectionReference<T> {
   /// * [strictMode] Whether to filter documents strictly within the bound of
   /// given radius.
   /// * [asBroadcastStream] Whether to return geo query results as broadcast.
-  Stream<List<DocumentSnapshot<T>>> subscribeWithin({
+  /* Stream<List<DocumentSnapshot<T>>> subscribeWithin({
     required final GeoFirePoint center,
     required final double radiusInKm,
     required final String field,
@@ -86,7 +87,7 @@ class GeoCollectionReference<T> {
         (final snapshots) => snapshots
             .map((final snapshot) => snapshot.documentSnapshot)
             .toList(),
-      );
+      ); */
 
   /// Subscribes geo query results with distance from center in kilometers
   /// ([GeoDocumentSnapshot]) by given conditions.
@@ -101,7 +102,7 @@ class GeoCollectionReference<T> {
   /// * [strictMode] Whether to filter documents strictly within the bound of
   /// given radius.
   /// * [asBroadcastStream] Whether to return geo query results as broadcast.
-  Stream<List<GeoDocumentSnapshot<T>>> subscribeWithinWithDistance({
+  /* Stream<List<GeoDocumentSnapshot<T>>> subscribeWithinWithDistance({
     required final GeoFirePoint center,
     required final double radiusInKm,
     required final String field,
@@ -154,7 +155,7 @@ class GeoCollectionReference<T> {
       return filteredGeoDocumentSnapshots.asBroadcastStream();
     }
     return filteredGeoDocumentSnapshots;
-  }
+  } */
 
   /// Fetches geo query results by given conditions.
   ///
@@ -261,7 +262,7 @@ class GeoCollectionReference<T> {
 
   /// Returns stream of [QueryDocumentSnapshot]s of neighbor and center
   /// Geohashes.
-  List<Stream<List<QueryDocumentSnapshot<T>>>> _collectionStreams({
+  /* List<Stream<List<QueryDocumentSnapshot<T>>>> _collectionStreams({
     required final double radiusInKm,
     required final GeoFirePoint center,
     required final String field,
@@ -278,7 +279,7 @@ class GeoCollectionReference<T> {
           ).snapshots().map((final querySnapshot) => querySnapshot.docs),
         )
         .toList();
-  }
+  } */
 
   /// Returns future of [QueryDocumentSnapshot]s of neighbor and center
   /// Geohashes.
@@ -301,13 +302,13 @@ class GeoCollectionReference<T> {
         );
 
         querySnapshot = await query.get(
-          GetOptions(
+         /*  GetOptions(
             source: isCacheFirst ? Source.cache : Source.serverAndCache,
-          ),
+          ), */
         );
         if (querySnapshot.docs.isEmpty && isCacheFirst) {
           querySnapshot =
-              await query.get(const GetOptions(source: Source.server));
+              await query.get(/* const GetOptions(source: Source.server) */);
         }
         return querySnapshot.docs;
       },
