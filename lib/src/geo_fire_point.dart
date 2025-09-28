@@ -51,6 +51,7 @@ class GeoFirePoint {
 
   Map<String, dynamic> toMap() {
     return {
+      'geohash': geohash,
       'geopoint': {
         'latitude': geopoint.latitude,
         'longitude': geopoint.longitude,
