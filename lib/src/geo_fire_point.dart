@@ -1,5 +1,7 @@
 // import 'package:cloud_firestore/cloud_firestore.dart';
 
+import 'dart:convert';
+
 import 'package:dart_firebase_admin/firestore.dart';
 
 import 'math.dart';
@@ -9,6 +11,18 @@ import 'utils.dart' as utils;
 class GeoFirePoint {
   /// Instantiates [GeoFirePoint].
   const GeoFirePoint(this.geopoint);
+
+  factory GeoFirePoint.fromMap(final Map<String, dynamic> map) {
+    return GeoFirePoint(
+      GeoPoint(
+        latitude: map['geopoint']['latitude'] as double,
+        longitude: map['geopoint']['longitude'] as double,
+      ),
+    );
+  }
+
+  factory GeoFirePoint.fromJson(final String source) =>
+      GeoFirePoint.fromMap(json.decode(source) as Map<String, dynamic>);
 
   /// [GeoPoint] of the location.
   final GeoPoint geopoint;
@@ -34,4 +48,15 @@ class GeoFirePoint {
   /// Returns [geopoint] and [geohash] as Map<String, dynamic>. Can be used when
   /// adding or updating to Firestore document.
   Map<String, dynamic> get data => {'geopoint': geopoint, 'geohash': geohash};
+
+  Map<String, dynamic> toMap() {
+    return {
+      'geopoint': {
+        'latitude': geopoint.latitude,
+        'longitude': geopoint.longitude,
+      },
+    };
+  }
+
+  String toJson() => json.encode(toMap());
 }
