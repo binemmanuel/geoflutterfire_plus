@@ -13,12 +13,7 @@ class GeoFirePoint {
   const GeoFirePoint(this.geopoint);
 
   factory GeoFirePoint.fromMap(final Map<String, dynamic> map) {
-    return GeoFirePoint(
-      GeoPoint(
-        latitude: map['geopoint']['latitude'] as double,
-        longitude: map['geopoint']['longitude'] as double,
-      ),
-    );
+    return GeoFirePoint(map['geopoint'] as GeoPoint);
   }
 
   factory GeoFirePoint.fromJson(final String source) =>
@@ -49,15 +44,7 @@ class GeoFirePoint {
   /// adding or updating to Firestore document.
   Map<String, dynamic> get data => {'geopoint': geopoint, 'geohash': geohash};
 
-  Map<String, dynamic> toMap() {
-    return {
-      'geohash': geohash,
-      'geopoint': {
-        'latitude': geopoint.latitude,
-        'longitude': geopoint.longitude,
-      },
-    };
-  }
+  Map<String, dynamic> toMap() => data;
 
   String toJson() => json.encode(toMap());
 }
